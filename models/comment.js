@@ -31,7 +31,7 @@ const commentSchema = new mongoose.Schema({
         default: true
     },
     place: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'place'
     }
 });

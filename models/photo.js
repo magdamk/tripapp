@@ -6,7 +6,7 @@ const photoSchema = new mongoose.Schema({
         required: true
     },
     place: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'place'
     }
 });
