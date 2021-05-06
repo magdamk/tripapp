@@ -7,10 +7,10 @@ const commentController = require('../controllers/comment_controller');
 const weatherController = require('../controllers/weather_controller');
 
 //place routes
-router.get('/places', placeController.getAllPlaces);
+router.get('/places/', placeController.getAllPlaces);
 router.get('/places/:id', placeController.getPlaceDetailsById);
-router.post('places', placeController.createPlace);
-router.patch('places/:id', placeController.updatePlace);
+router.post('/places/', placeController.createPlace);
+router.patch('/places/:id', placeController.updatePlace);
 
 //photo routes
 router.get('/photos/:id', photoController.getPhotosForPlace); //place id
