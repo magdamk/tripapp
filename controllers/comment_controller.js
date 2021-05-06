@@ -1,5 +1,6 @@
 const Place = require('../models/place');
 const Comment = require('../models/comment');
+const comment = require('../models/comment');
 
 exports.getCommentsForPlace = async(req, res) => {
     let place = req.body.place;
@@ -29,14 +30,20 @@ exports.createCommentForPlace = async(req, res) => {
     }
 }
 exports.markCommentNotProper = async(req, res) => {
-    const comment = req.body.comment;
-    if (!req.body.proper) {
-
-        try {
-            const deletedComment = await place.save();
-            res.json(deletedComment);
-        } catch (err) {
-            res.status(400).json({ message: err.message })
+    let comment;
+    try {
+        comment = await Comment.findById(req.params.id);
+        if (comment == null) {
+            return res.status(404).json({ message: "Comment not found" })
         }
+    } catch (err) {
+        res.status(500).json({ message: err.message })
+    }
+    comment.proper = false;
+    try {
+        const deletedComment = await comment.save();
+        res.json(deletedComment);
+    } catch (err) {
+        res.status(400).json({ message: err.message })
     }
 }
