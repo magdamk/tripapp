@@ -10,7 +10,16 @@ exports.getAllPlaces = async(req, res) => {
 }
 
 exports.getPlaceDetailsById = async(req, res) => {
-    res.status(404).json({ message: "Page under construction" })
+    let place;
+    try {
+        place = await Place.findById(req.params.id);
+        if (place == null) {
+            return res.status(404).json({ message: "Place not found" })
+        }
+    } catch (err) {
+        res.status(500).json({ message: err.message })
+    }
+    res.json(place);
 }
 
 exports.createPlace = async(req, res) => {
