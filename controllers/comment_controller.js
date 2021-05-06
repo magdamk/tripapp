@@ -42,7 +42,7 @@ exports.markCommentNotProper = async(req, res) => {
     comment.proper = false;
     try {
         const deletedComment = await comment.save();
-        res.json(deletedComment);
+        res.status(204).json(deletedComment);
     } catch (err) {
         res.status(400).json({ message: err.message })
     }
