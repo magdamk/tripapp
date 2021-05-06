@@ -47,7 +47,7 @@ exports.createPlace = async(req, res) => {
 }
 
 exports.updatePlace = async(req, res) => {
-    let place = req.body.place;
+    const place = req.body.place;
     if (req.body.name)
         place.name = req.body.name;
     if (req.body.description)

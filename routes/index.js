@@ -18,7 +18,7 @@ router.post('/photos/:id', placeController.getPlaceById, photoController.addPhot
 router.delete('/photos/:id', photoController.removePhotoById); //photo id
 
 //comment routes
-router.get('/commnets/:id', placeController.getPlaceById, commentController.getCommentsForPlace); //place id
+router.get('/comments/:id', placeController.getPlaceById, commentController.getCommentsForPlace); //place id
 router.post('/comments/:id', placeController.getPlaceById, commentController.createCommentForPlace); //place id
 router.delete('/comments/:id', commentController.markCommentNotProper); //comment id
 
