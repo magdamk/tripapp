@@ -1,6 +1,5 @@
 const Place = require('../models/place');
 const Comment = require('../models/comment');
-const comment = require('../models/comment');
 
 exports.getCommentsForPlace = async(req, res) => {
     let place = req.body.place;
