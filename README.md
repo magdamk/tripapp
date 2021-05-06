@@ -1,1 +1,2 @@
 # tripapp
+aplikacja zaliczeniowa
