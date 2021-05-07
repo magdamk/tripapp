@@ -2,7 +2,13 @@ const Place = require('../models/place');
 
 exports.getAllPlaces = async(req, res) => {
     try {
-        const places = await Place.find();
+        const query = req.query;
+        const criteria = {};
+        if (query.name) { criteria.name = { $regex: query.name } }
+        if (query.city) { criteria.city = { $regex: query.city } }
+        if (query.description) { criteria.description = { $regex: query.description } }
+        if (query.street) { criteria.street = { $regex: query.street } }
+        const places = await Place.find(criteria);
         res.json(places);
     } catch (err) {
         res.status(500).json({ message: err.message })
