@@ -7,20 +7,20 @@ const commentController = require('../controllers/comment_controller');
 const weatherController = require('../controllers/weather_controller');
 
 //place routes
-router.get('/places/', placeController.getAllPlaces);
-router.get('/places/:id', placeController.getPlaceById, placeController.getPlaceDetailsById);
-router.post('/places/', placeController.createPlace);
-router.patch('/places/:id', placeController.getPlaceById, placeController.updatePlace);
+router.get('/api/places/', placeController.getAllPlaces);
+router.get('/api/places/:id', placeController.getPlaceById, placeController.getPlaceDetailsById);
+router.post('/api/places/', placeController.createPlace);
+router.patch('/api/places/:id', placeController.getPlaceById, placeController.updatePlace);
 
 //photo routes
-router.get('/photos/:id', placeController.getPlaceById, photoController.getPhotosForPlace); //place id
-router.post('/photos/:id', placeController.getPlaceById, photoController.addPhotoForPlace); //place id
-router.delete('/photos/:id', photoController.removePhotoById); //photo id
+router.get('/api/photos/:id', placeController.getPlaceById, photoController.getPhotosForPlace); //place id
+router.post('/api/photos/:id', placeController.getPlaceById, photoController.addPhotoForPlace); //place id
+router.delete('/api/photos/:id', photoController.removePhotoById); //photo id
 
 //comment routes
-router.get('/comments/:id', placeController.getPlaceById, commentController.getCommentsForPlace); //place id
-router.post('/comments/:id', placeController.getPlaceById, commentController.createCommentForPlace); //place id
-router.delete('/comments/:id', commentController.markCommentNotProper); //comment id
+router.get('/api/comments/:id', placeController.getPlaceById, commentController.getCommentsForPlace); //place id
+router.post('/api/comments/:id', placeController.getPlaceById, commentController.createCommentForPlace); //place id
+router.delete('/api/comments/:id', commentController.markCommentNotProper); //comment id
 
 //weather routes
 
