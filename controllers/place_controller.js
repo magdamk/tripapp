@@ -25,7 +25,6 @@ exports.getAllPlaces = async(req, res) => {
             }
             places[place].average = a;
         }
-        console.log(query)
         places.sort((a, b) => b.average - a.average)
         res.json(places);
     } catch (err) {

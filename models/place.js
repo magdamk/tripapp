@@ -36,6 +36,10 @@ const placeSchema = new mongoose.Schema({
     average: {
         type: Number,
         required: false
+    },
+    photoMain: {
+        type: String,
+        require: false
     }
 });
 
