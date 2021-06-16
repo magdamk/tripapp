@@ -32,6 +32,10 @@ const placeSchema = new mongoose.Schema({
     timeToVisit: {
         type: Number,
         rquired: true
+    },
+    average: {
+        type: Number,
+        required: false
     }
 });
 

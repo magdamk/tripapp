@@ -23,6 +23,7 @@ exports.createCommentForPlace = async(req, res) => {
     })
     try {
         const addedComment = await newComment.save();
+        console.log(addedComment);
         res.status(201).json(addedComment);
     } catch (err) {
         res.status(400).json({ message: err.message });

@@ -1,4 +1,5 @@
 const Place = require('../models/place');
+const Comment = require('../models/comment');
 
 exports.getAllPlaces = async(req, res) => {
     try {
@@ -8,7 +9,24 @@ exports.getAllPlaces = async(req, res) => {
         if (query.city) { criteria.city = { $regex: query.city } }
         if (query.description) { criteria.description = { $regex: query.description } }
         if (query.street) { criteria.street = { $regex: query.street } }
-        const places = await Place.find(criteria);
+        if (query.costToVisit) { criteria.costToVisit = { $lte: query.costToVisit } }
+        let places = await Place.find(criteria);
+        for (place in places) {
+            let commentsForPlace = await Comment.find({ place: places[place]._id, proper: true });
+            let sum = 0;
+            let i = 0;
+            while (i < commentsForPlace.length) {
+                sum += commentsForPlace[i].rate;
+                i++;
+            }
+            let a = 0;
+            if (commentsForPlace.length) {
+                a = (sum / commentsForPlace.length).toFixed(0);
+            }
+            places[place].average = a;
+        }
+        console.log(query)
+        places.sort((a, b) => b.average - a.average)
         res.json(places);
     } catch (err) {
         res.status(500).json({ message: err.message })
