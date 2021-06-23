@@ -10,7 +10,7 @@ exports.getAllPlaces = async(req, res) => {
         if (query.description) { criteria.description = { $regex: query.description } }
         if (query.street) { criteria.street = { $regex: query.street } }
         if (query.costToVisit) { criteria.costToVisit = { $lte: query.costToVisit } }
-        let places = await Place.find(criteria);
+        let places = await Place.find(criteria).limit(250);
         for (place in places) {
             let commentsForPlace = await Comment.find({ place: places[place]._id, proper: true });
             let sum = 0;
@@ -83,12 +83,15 @@ exports.updatePlace = async(req, res) => {
         place.latitude = req.body.latitude;
     if (req.body.longitude)
         place.longitude = req.body.longitude;
-    if (req.body.costToVisit)
+    if (req.body.costToVisit || req.body.costToVisit === 0)
         place.costToVisit = req.body.costToVisit;
     if (req.body.timeToVisit)
         place.timeToVisit = req.body.timeToVisit;
+    if (req.body.photoMain)
+        place.photoMain = req.body.photoMain
     try {
         const updatedPlace = await place.save();
+        console.log(updatedPlace);
         res.json(updatedPlace);
     } catch (err) {
         res.status(400).json({ message: err.message })
