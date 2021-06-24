@@ -5,11 +5,15 @@ const passport = require('passport');
 const placeController = require('../controllers/place_controller');
 const photoController = require('../controllers/photo_controller');
 const commentController = require('../controllers/comment_controller');
-const weatherController = require('../controllers/weather_controller');
 const adminController = require('../controllers/admin_controller');
 
 //login routes
+router.get('/register/', adminController.getRegister);
 router.post('/register/', adminController.postRegister);
+router.get('/api/admin/', adminController.checkAuthenticated, adminController.getAutLogin);
+router.get('/api/admin/', adminController.checkNotAuthenticated, adminController.getNotAutLogin);
+router.get('/api/logout/', adminController.getLogout);
+router.post('/api/admin/', passport.authenticate('local', { failureFlash: true, failureMessage: "Nieprawidłowe dane logowania" }), adminController.postLogin);
 
 //place routes
 router.get('/api/places/', placeController.getAllPlaces);
