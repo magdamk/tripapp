@@ -47,7 +47,6 @@ exports.markCommentNotProper = async(req, res) => {
         const deletedComment = await comment.save();
         let place;
         place = await Place.findById(comment.place);
-        console.log(place)
         if (place) {
             updatePlaceAverageById(place);
         }

@@ -62,7 +62,9 @@ exports.createPlace = async(req, res) => {
         longitude: req.body.longitude,
         street: req.body.street,
         costToVisit: req.body.costToVisit,
-        timeToVisit: req.body.timeToVisit
+        timeToVisit: req.body.timeToVisit,
+        average: 0,
+        photoMain: ''
     })
     try {
         const addedPlace = await newPlace.save();
