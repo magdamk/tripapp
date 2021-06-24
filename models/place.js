@@ -39,7 +39,7 @@ const placeSchema = new mongoose.Schema({
     },
     photoMain: {
         type: String,
-        require: false
+        require: true
     }
 });
 
