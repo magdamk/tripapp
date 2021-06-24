@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
+const cors = require('cors');
 
 const placeController = require('../controllers/place_controller');
 const photoController = require('../controllers/photo_controller');
