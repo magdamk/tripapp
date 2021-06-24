@@ -7,7 +7,7 @@ const placeSchema = new mongoose.Schema({
     },
     city: {
         type: String,
-        rquired: false
+        rquired: true
     },
     description: {
         type: String,
@@ -23,7 +23,7 @@ const placeSchema = new mongoose.Schema({
     },
     street: {
         type: String,
-        rquired: false
+        rquired: true
     },
     costToVisit: {
         type: Number,

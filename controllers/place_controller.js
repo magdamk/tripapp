@@ -11,25 +11,28 @@ exports.getAllPlaces = async(req, res) => {
         if (query.street) { criteria.street = { $regex: query.street } }
         if (query.costToVisit) { criteria.costToVisit = { $lte: query.costToVisit } }
         let places = await Place.find(criteria).limit(250);
-        for (place in places) {
-            let commentsForPlace = await Comment.find({ place: places[place]._id, proper: true });
-            let sum = 0;
-            let i = 0;
-            while (i < commentsForPlace.length) {
-                sum += commentsForPlace[i].rate;
-                i++;
-            }
-            let a = 0;
-            if (commentsForPlace.length) {
-                a = (sum / commentsForPlace.length).toFixed(0);
-            }
-            places[place].average = a;
-        }
         places.sort((a, b) => b.average - a.average)
         res.json(places);
     } catch (err) {
         res.status(500).json({ message: err.message })
     }
+}
+
+exports.updatePlaceAverageById = async(place) => {
+    const id = place._id;
+    let commentsForPlace = await Comment.find({ place: id, proper: true });
+    let sum = 0;
+    let i = 0;
+    while (i < commentsForPlace.length) {
+        sum += commentsForPlace[i].rate;
+        i++;
+    }
+    let a = 0;
+    if (commentsForPlace.length) {
+        a = (sum / commentsForPlace.length).toFixed(0);
+    }
+    place.average = a;
+    await place.save();
 }
 
 exports.getPlaceDetailsById = async(req, res) => {

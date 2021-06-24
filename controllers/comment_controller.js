@@ -1,5 +1,6 @@
 const Place = require('../models/place');
 const Comment = require('../models/comment');
+const { updatePlaceAverageById, getPlaceById } = require('./place_controller');
 
 exports.getCommentsForPlace = async(req, res) => {
     let place = req.body.place;
@@ -23,7 +24,7 @@ exports.createCommentForPlace = async(req, res) => {
     })
     try {
         const addedComment = await newComment.save();
-        console.log(addedComment);
+        await updatePlaceAverageById(place);
         res.status(201).json(addedComment);
     } catch (err) {
         res.status(400).json({ message: err.message });
@@ -40,8 +41,16 @@ exports.markCommentNotProper = async(req, res) => {
         res.status(500).json({ message: err.message })
     }
     comment.proper = false;
+    console.log(comment.place)
+
     try {
         const deletedComment = await comment.save();
+        let place;
+        place = await Place.findById(comment.place);
+        console.log(place)
+        if (place) {
+            updatePlaceAverageById(place);
+        }
         res.status(204).json(deletedComment);
     } catch (err) {
         res.status(400).json({ message: err.message })
