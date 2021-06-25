@@ -13,11 +13,10 @@ exports.getPhotosForPlace = async(req, res) => {
 }
 
 exports.addPhotoForPlace = async(req, res) => {
-    const place = req.body.place;
-    console.log(place);
+    const place = req.params.id;
     const newPhoto = new Photo({
         url: req.body.url,
-        place: place._id
+        place: place
     })
     try {
         const addedPhoto = await newPhoto.save();

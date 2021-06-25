@@ -24,7 +24,7 @@ router.patch('/api/places/:id', cors(), adminController.checkAuthenticated, plac
 
 //photo routes
 router.get('/api/photos/:id', cors(), placeController.getPlaceById, photoController.getPhotosForPlace); //place id
-router.post('/api/photos/:id', cors(), adminController.checkAuthenticated, placeController.getPlaceById, photoController.addPhotoForPlace); //place id
+router.post('/api/photos/:id', cors(), adminController.checkAuthenticated, photoController.addPhotoForPlace); //place id
 router.delete('/api/photos/:id', cors(), adminController.checkAuthenticated, photoController.removePhotoById); //photo id
 
 //comment routes
