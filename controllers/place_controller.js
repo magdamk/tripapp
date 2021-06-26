@@ -11,7 +11,7 @@ exports.getAllPlaces = async(req, res) => {
         if (query.street) { criteria.street = { $regex: query.street } }
         if (query.costToVisit) { criteria.costToVisit = { $lte: query.costToVisit } }
         if (query.average) { criteria.average = { $gte: query.average } }
-        let places = await Place.find(criteria).limit(250);
+        let places = await Place.find(criteria);
         places.sort((a, b) => b.average - a.average)
         res.json(places);
     } catch (err) {
