@@ -13,7 +13,7 @@ const app = express();
 const mongoose = require('mongoose');
 const router = require('./routes/index');
 
-mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect("mongodb+srv://admin:okulary@studies.0bpsj.mongodb.net/tripapp?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 db.on('error', (error) => console.error(error));
 db.once('open', () => console.log('Connected to DB'));
