@@ -8,7 +8,7 @@ const photoController = require('../controllers/photo_controller');
 const commentController = require('../controllers/comment_controller');
 const adminController = require('../controllers/admin_controller');
 
-router.get('/', (req, res) => res.render('<html><body>Dzialam!</body></html>'));
+router.get('/', (req, res) => res.send('Dzialam!'));
 //login routes
 router.get('/register/', adminController.getRegister);
 router.post('/register/', adminController.postRegister);
