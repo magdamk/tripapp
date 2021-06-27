@@ -41,7 +41,6 @@ exports.markCommentNotProper = async(req, res) => {
         res.status(500).json({ message: err.message })
     }
     comment.proper = false;
-    console.log(comment.place)
 
     try {
         const deletedComment = await comment.save();

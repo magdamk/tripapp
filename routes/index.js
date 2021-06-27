@@ -14,22 +14,28 @@ router.post('/register/', adminController.postRegister);
 router.get('/api/admin/', cors(), adminController.checkAuthenticated, adminController.getAutLogin);
 router.get('/api/admin/', cors(), adminController.checkNotAuthenticated, adminController.getNotAutLogin);
 router.get('/api/logout/', cors(), adminController.getLogout);
-router.post('/api/admin/', cors(), passport.authenticate('local', { failureFlash: true, failureMessage: "Nieprawidłowe dane logowania" }), adminController.postLogin);
+router.options('/api/admin/', cors());
+router.post('/api/admin/', cors(), passport.authenticate('local', { failureFlash: true, failureMessage: "Nieprawidłowe dane logowania (serwer)" }), adminController.postLogin);
 
 //place routes
 router.get('/api/places/', cors(), placeController.getAllPlaces);
 router.get('/api/places/:id', cors(), placeController.getPlaceById, placeController.getPlaceDetailsById);
-router.post('/api/places/', cors(), adminController.checkAuthenticated, placeController.createPlace);
-router.patch('/api/places/:id', cors(), adminController.checkAuthenticated, placeController.getPlaceById, placeController.updatePlace);
+router.options('/api/places/', cors());
+router.post('/api/places/', cors(), placeController.createPlace);
+router.options('/api/places/:id', cors());
+router.patch('/api/places/:id', cors(), placeController.getPlaceById, placeController.updatePlace);
 
 //photo routes
 router.get('/api/photos/:id', cors(), placeController.getPlaceById, photoController.getPhotosForPlace); //place id
-router.post('/api/photos/:id', cors(), adminController.checkAuthenticated, photoController.addPhotoForPlace); //place id
-router.delete('/api/photos/:id', cors(), adminController.checkAuthenticated, photoController.removePhotoById); //photo id
+router.options('/api/photos/:id', cors());
+router.post('/api/photos/:id', cors(), photoController.addPhotoForPlace); //place id
+router.delete('/api/photos/:id', cors(), photoController.removePhotoById); //photo id
 
 //comment routes
 router.get('/api/comments/:id', cors(), placeController.getPlaceById, commentController.getCommentsForPlace); //place id
+router.options('/api/comments/:id', cors());
 router.post('/api/comments/:id', cors(), placeController.getPlaceById, commentController.createCommentForPlace); //place id
-router.delete('/api/comments/:id', cors(), adminController.checkAuthenticated, commentController.markCommentNotProper); //comment id
+router.options('/api/comments/:id', cors());
+router.delete('/api/comments/:id', cors(), commentController.markCommentNotProper); //comment id
 
 module.exports = router;
