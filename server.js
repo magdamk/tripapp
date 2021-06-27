@@ -1,4 +1,4 @@
-require('dotenv').config();
+// require('dotenv').config();
 
 const express = require('express');
 const passport = require('passport');
@@ -28,7 +28,7 @@ app.set('view-engine', 'ejs')
 app.use(express.urlencoded({ extended: false }));
 app.use(flash())
 app.use(session({
-    secret: process.env.SESSION_KEY,
+    secret: "tratatatatrututu",
     resave: false,
     saveUninitialized: false
 }))
