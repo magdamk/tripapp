@@ -1,4 +1,4 @@
-// require('dotenv').config();
+require('dotenv').config();
 
 const express = require('express');
 const passport = require('passport');
@@ -13,7 +13,7 @@ const app = express();
 const mongoose = require('mongoose');
 const router = require('./routes/index');
 
-mongoose.connect("mongodb+srv://admin:okulary@studies.0bpsj.mongodb.net/tripapp?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 db.on('error', (error) => console.error(error));
 db.once('open', () => console.log('Connected to DB'));
@@ -28,7 +28,7 @@ app.set('view-engine', 'ejs')
 app.use(express.urlencoded({ extended: false }));
 app.use(flash())
 app.use(session({
-    secret: "tratatatatrututu",
+    secret: process.env.SESSION_KEY,
     resave: false,
     saveUninitialized: false
 }))
