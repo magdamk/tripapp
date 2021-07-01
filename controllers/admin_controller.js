@@ -16,7 +16,6 @@ exports.postRegister = async(req, res) => {
         if (!checkUser.length) {
             const addedUser = await newUser.save();
             res.status(201).render('index.ejs', { message: addedUser.email });
-            console.log('new admin registered' + addedUser)
         } else res.status(400).json({ message: "User already exists" })
     } catch (err) {
         res.status(500).json({ message: err.message })
@@ -24,7 +23,6 @@ exports.postRegister = async(req, res) => {
 }
 
 exports.getAutLogin = async(req, res) => {
-    console.log(req.user.email, 'check');
     res.json({ message: req.user })
 }
 
@@ -34,12 +32,10 @@ exports.getNotAutLogin = async(req, res) => {
 
 exports.postLogin = async(req, res) => {
     //checkNotAuthenticated, 
-    console.log(req.user, 'logged in');
     res.json({ message: req.user.email || req.message })
 
 }
 exports.getLogout = async(req, res) => {
-    console.log(req.user, 'logged out')
     req.logout()
     res.json({ message: "Zostałeś wylogowany" })
 }
