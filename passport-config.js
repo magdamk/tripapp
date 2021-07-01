@@ -7,7 +7,7 @@ function initialize(passport, getUserByEmail, getUserById) {
         let user = await getUserByEmail(email)
         user = user[0];
         if (user == null) {
-            console.log('zły user')
+            // console.log('zły user')
             return done(null, false, { message: 'Nieprawidłowe dane logowania' })
         }
         try {
@@ -15,7 +15,7 @@ function initialize(passport, getUserByEmail, getUserById) {
             if (await bcrypt.compare(password, user.password)) {
                 return done(null, user)
             } else {
-                console.log('złe hasło')
+                //   console.log('złe hasło')
                 return done(null, false, { message: 'Nieprawidłowe dane logowania' })
             }
         } catch (e) {
